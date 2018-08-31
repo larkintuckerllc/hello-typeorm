@@ -2,19 +2,19 @@
    "type": "postgres",
    "host": "localhost",
    "port": 5432,
-   "username": "test",
-   "password": "test",
-   "database": "test",
+   "username": "hellouser",
+   "password": "hellouser",
+   "database": "hellodb",
    "synchronize": true,
    "logging": false,
    "entities": [
-      "src/entity/**/*.ts"
+      "dist/entity/**/*.js"
    ],
    "migrations": [
-      "src/migration/**/*.ts"
+      "dist/migration/**/*.js"
    ],
    "subscribers": [
-      "src/subscriber/**/*.ts"
+      "dist/subscriber/**/*.js"
    ],
    "cli": {
       "entitiesDir": "src/entity",
