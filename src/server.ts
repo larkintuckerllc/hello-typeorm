@@ -1,10 +1,9 @@
 import express from 'express';
 import 'reflect-metadata';
 import { createConnection } from 'typeorm';
-import { createTodo, initializeTodos, readTodos } from './todosManager';
+import { createTodo, readTodos } from './todosManager';
 
-createConnection().then(async (connection) => {
-  initializeTodos(connection);
+createConnection().then(async () => {
   const app = express();
   app.get('/create', createTodo);
   app.get('/read', readTodos);
