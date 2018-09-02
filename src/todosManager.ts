@@ -26,3 +26,11 @@ export const readTodos = async (_: Request, res: Response) => {
   const todos = await repository.find();
   res.send(todos);
 };
+
+export const readTodosIncomplete = async (_: Request, res: Response) => {
+  if (repository === undefined) {
+    initialize();
+  }
+  const todos = await repository.find({ isComplete: false });
+  res.send(todos);
+};

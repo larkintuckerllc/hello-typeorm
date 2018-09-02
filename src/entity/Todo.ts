@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn} from 'typeorm';
+import { Column, Entity, Index, PrimaryGeneratedColumn} from 'typeorm';
 
 @Entity()
 export class Todo {
@@ -8,6 +8,7 @@ export class Todo {
     @Column()
     public name: string = '';
 
+    @Index()
     @Column()
     public isComplete: boolean = false;
 }
