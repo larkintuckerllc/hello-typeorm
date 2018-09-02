@@ -7,7 +7,7 @@
    "database": "hellodb",
    "synchronize": false,
    "migrationsRun": true,
-   "logging": false,
+   "logging": true,
    "entities": [
       "dist/entity/**/*.js"
    ],
