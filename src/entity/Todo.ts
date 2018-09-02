@@ -7,13 +7,18 @@ export class Todo {
   @PrimaryGeneratedColumn()
   public id: number;
 
-  @Column()
   @Validate(CapitalLetterValidator)
   public name: string = '';
 
   @Index()
   @Column()
   public isComplete: boolean = false;
+
+  @Column('character varying', {
+    name: 'name',
+    nullable: false,
+  })
+  public persistedName: string = '';
 }
 
 export default Todo;

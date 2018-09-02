@@ -1,13 +1,14 @@
 import { validate } from 'class-validator';
 import { NextFunction, Request, Response } from 'express';
-import { getConnection, Repository } from 'typeorm';
+import { getConnection } from 'typeorm';
 import Todo from './entity/Todo';
+import TodoRepository from './TodoRepository';
 
-let repository: Repository<Todo>;
+let repository: TodoRepository;
 
 const initialize = () => {
   const connection = getConnection();
-  repository = connection.getRepository(Todo);
+  repository = connection.getCustomRepository(TodoRepository);
 };
 
 export const createTodo = async (_: Request, res: Response, next: NextFunction) => {
