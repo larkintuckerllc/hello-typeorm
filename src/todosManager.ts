@@ -1,17 +1,20 @@
 import { validate } from 'class-validator';
 import { NextFunction, Request, Response } from 'express';
 import { getConnection, Repository } from 'typeorm';
+import Author from './entity/Author';
 import Todo from './entity/Todo';
 import TodoMetadata from './entity/TodoMetadata';
 import TodoRepository from './TodoRepository';
 
 let initialized = false;
+let authorRepository: Repository<Author>;
 let todoRepository: TodoRepository;
 let todoMetadataRepository: Repository<TodoMetadata>;
 
 const initialize = () => {
   initialized = true;
   const connection = getConnection();
+  authorRepository = connection.getRepository(Author);
   todoRepository = connection.getCustomRepository(TodoRepository);
   todoMetadataRepository = connection.getRepository(TodoMetadata);
 };
@@ -21,10 +24,20 @@ export const createTodo = async (_: Request, res: Response, next: NextFunction) 
     initialize();
   }
   try {
+    let author: Author;
+    const authors = await authorRepository.find();
+    if (authors.length === 0) {
+      author = new Author();
+      author.name = 'John Doe';
+      await authorRepository.save(author);
+    } else {
+      author = authors[0];
+    }
     const todoMetadata = new TodoMetadata();
     todoMetadata.comment = 'Hello comment';
     const todo = new Todo();
     todo.name = 'A Todo';
+    todo.author = author;
     const errors = await validate(todo);
     if (errors.length > 0) {
       throw 400;

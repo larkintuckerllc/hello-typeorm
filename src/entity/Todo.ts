@@ -1,6 +1,7 @@
 import { Validate } from 'class-validator';
-import { AfterInsert, Column, Entity, Index, JoinColumn, OneToOne, PrimaryGeneratedColumn} from 'typeorm';
+import { AfterInsert, Column, Entity, Index, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn} from 'typeorm';
 import CapitalLetterValidator from '../CapitalLetterValidator';
+import Author from './Author';
 import TodoMetadata from './TodoMetadata';
 
 @Entity()
@@ -24,6 +25,10 @@ export default class Todo {
   @OneToOne(() => TodoMetadata)
   @JoinColumn()
   public metadata: TodoMetadata;
+
+  @Index()
+  @ManyToOne(() => Author, (author) => author.todos)
+  public author: Author;
 
   @AfterInsert()
   public handleAfterInsert() {
