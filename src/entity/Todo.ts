@@ -1,9 +1,9 @@
 import { Validate } from 'class-validator';
-import { Column, Entity, Index, PrimaryGeneratedColumn} from 'typeorm';
+import { AfterInsert, Column, Entity, Index, PrimaryGeneratedColumn} from 'typeorm';
 import CapitalLetterValidator from '../CapitalLetterValidator';
 
 @Entity()
-export class Todo {
+export default class Todo {
   @PrimaryGeneratedColumn()
   public id: number;
 
@@ -19,6 +19,9 @@ export class Todo {
     nullable: false,
   })
   public persistedName: string = '';
-}
 
-export default Todo;
+  @AfterInsert()
+  public handleAfterInsert() {
+    console.log(`INSERTED TODO WITH ID: ${this.id}`);
+  }
+}

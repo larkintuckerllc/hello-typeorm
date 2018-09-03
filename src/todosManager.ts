@@ -56,3 +56,15 @@ export const readTodosIncomplete = async (_: Request, res: Response, next: NextF
     next(error);
   }
 };
+
+export const readTodosIncomplete2 = async (_: Request, res: Response, next: NextFunction) => {
+  if (repository === undefined) {
+    initialize();
+  }
+  try {
+    const todos = await repository.findIncomplete();
+    res.send(todos);
+  } catch (error) {
+    next(error);
+  }
+};
