@@ -26,6 +26,7 @@ export default class Todo {
   @JoinColumn()
   public metadata: TodoMetadata;
 
+  @Index()
   @ManyToOne(() => Author, (author) => author.todos)
   public author: Author;
 
