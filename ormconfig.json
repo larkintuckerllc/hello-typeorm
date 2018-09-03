@@ -1,25 +1,33 @@
 {
-   "type": "postgres",
-   "host": "localhost",
-   "port": 5432,
-   "username": "hellouser",
-   "password": "hellouser",
-   "database": "hellodb",
-   "synchronize": false,
-   "migrationsRun": true,
-   "logging": true,
-   "entities": [
-      "dist/entity/**/*.js"
-   ],
-   "migrations": [
-      "dist/migration/**/*.js"
-   ],
-   "subscribers": [
-      "dist/subscriber/**/*.js"
-   ],
-   "cli": {
-      "entitiesDir": "src/entity",
-      "migrationsDir": "src/migration",
-      "subscribersDir": "src/subscriber"
-   }
+  "type": "postgres",
+  "host": "localhost",
+  "port": 5432,
+  "username": "hellouser",
+  "password": "hellouser",
+  "database": "hellodb",
+  "synchronize": false,
+  "migrationsRun": true,
+  "logging": true,
+  "entities": [
+     "dist/entity/**/*.js"
+  ],
+  "migrations": [
+     "dist/migration/**/*.js"
+  ],
+  "subscribers": [
+     "dist/subscriber/**/*.js"
+  ],
+  "cli": {
+     "entitiesDir": "src/entity",
+     "migrationsDir": "src/migration",
+     "subscribersDir": "src/subscriber"
+  },
+  "cache": {
+    "type": "redis",
+    "duration": 30000,
+    "options": {
+      "host": "localhost",
+      "port": 6379
+    }
+  }
 }
