@@ -42,7 +42,7 @@ export default class Todo {
   @ManyToOne(() => Author, (author) => author.todos)
   public author: Author;
 
-  @ManyToMany(() => Category)
+  @ManyToMany(() => Category, (category) => category.todos)
   @JoinTable()
   public categories: Category[];
 

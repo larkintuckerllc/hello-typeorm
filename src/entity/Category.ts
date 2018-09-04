@@ -1,4 +1,5 @@
-import {Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {Column, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
+import Todo from './Todo';
 
 @Entity()
 export default class Category {
@@ -7,4 +8,7 @@ export default class Category {
 
     @Column()
     public name: string;
+
+    @ManyToMany(() => Todo, (todo) => todo.categories)
+    public todos: Todo[];
 }
